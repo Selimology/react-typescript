@@ -1,0 +1,65 @@
+interface CoordinateInterface {
+  x: number;
+  y: number;
+}
+type CoordinateType = [number, number];
+
+type Coordinate = CoordinateInterface | CoordinateType;
+
+function measureDistance(point1: Coordinate, point2: Coordinate): number {
+  const { x: x1, y: y1 } = extractXY(point1);
+  const { x: x2, y: y2 } = extractXY(point2);
+
+  return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+}
+
+function extractXY(point: Coordinate) {
+  if (Array.isArray(point)) {
+    return { x: point[0], y: point[1] };
+  } else {
+    return point;
+  }
+}
+
+const distance1 = measureDistance([0, 0], [10, 10]);
+const distance2 = measureDistance({ x: 0, y: 0 }, { x: 10, y: 10 });
+
+// ------------------------------
+
+interface Fruit {
+  name: string;
+  sweetness: number;
+}
+
+interface Vegetable {
+  name: string;
+  hasSeeds: boolean;
+}
+
+type EdibleThing = Fruit | Vegetable;
+
+function checkForSeeds(food: EdibleThing) {
+  //since either it fruit or vegetable. We have to do type narrowing. Use In keyword.
+  /*
+  Property 'hasSeeds' does not exist on type 'EdibleThing'.
+  Property 'hasSeeds' does not exist on type 'Fruit'.
+  */
+
+  if ('hasSeeds' in food) {
+    console.log(food.hasSeeds);
+  }
+}
+
+interface Deez {
+  name: string;
+  sweetness?: number;
+}
+
+function getSweetness(fruit: Deez): number {
+  const sweetness = fruit.sweetness;
+  //Type 'number | undefined", so we type narrowing to check if it is a number.
+  if (sweetness) {
+    return sweetness;
+  }
+  throw new Error('Not a fruit');
+}

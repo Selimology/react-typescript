@@ -1,0 +1,39 @@
+interface Fruit {
+  name: string;
+  sweetness: number;
+}
+
+interface Vegetable {
+  name: string;
+  hasSeeds: boolean;
+}
+
+// interface EdibleThing {
+//   name: string;
+//   sweetnesS: number;
+//   hasSeeds: boolean;
+// }
+
+//Intersection Type = Combine multiple types into one.
+
+type EdibleThing = Fruit & Vegetable;
+
+let banana: EdibleThing = { name: 'banana', sweetness: 10, hasSeeds: false };
+
+///This won't work:
+tpye EdibleThing = string & number;
+
+//This also won't work
+
+interface Candy{
+  name:string,
+  sweetness: number,
+}
+interface NotCandy{
+  name:string,
+  sweetness:string
+}
+
+//The issue in this case is , typescript won't be able to figure out what the type of sweetness is.
+type EdibleCandy = Candy & NotCandy;
+

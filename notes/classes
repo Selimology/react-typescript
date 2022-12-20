@@ -1,0 +1,60 @@
+class Fruit {
+  name: string;
+  color!: string; // ! means that the property is not required
+  sweetness: number;
+  constructor(name: string, color: string, sweetness: number) {
+    this.name = name;
+    this.color = color;
+    this.sweetness = sweetness;
+  }
+  fullName() {
+    const isSweet = this.sweetness > 50;
+    return `${isSweet ? 'Sweet' : 'Not sweet'} ${this.color} ${this.name}`;
+  }
+}
+
+class EdibleThing extends Fruit {
+  static cookingTimeSeconds = 5;
+  static cook(vegetable: EdibleThing) {
+    console.log(
+      `Cooking ${vegetable.name} for ${EdibleThing.cookingTimeSeconds} seconds`
+    );
+  }
+  isEdible: boolean;
+  //In constructor we can use the super keyword to call the parent class constructor
+  constructor(
+    name: string,
+    color: string,
+    sweetness: number,
+    isEdible: boolean
+  ) {
+    super(name, color, sweetness);
+    this.isEdible = isEdible;
+  }
+}
+
+//The Fruit class in this case is a function
+console.log(typeof Fruit);
+
+//However if we create an instance of the class, it will be an object
+//We have to use the new keyword to create an instance of the class
+const Apple = new Fruit('Apple', 'Red', 60);
+console.log(typeof Apple); // object
+
+const fruitBasket: Fruit[] = [];
+fruitBasket.push(Apple);
+
+//Abstract class example, we can't create an instance of an abstract class
+//We can only create an instance of a class that extends the abstract class
+abstract class Animal {
+  abstract makeSound(): void;
+  move(): void {
+    console.log('roaming the earth...');
+  }
+}
+
+class Dog extends Animal {
+  makeSound(): void {
+    console.log('Woof! Woof!');
+  }
+}

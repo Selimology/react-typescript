@@ -1,0 +1,89 @@
+/*
+While using const object to prevent any typo is a good practice, it is not the best way to do it.
+In the example below , you can still pass any string to the function seasonsGreetings.
+*/
+
+// const SEASONS = {
+//   SPRING: 'spring',
+//   SUMMER: 'summer',
+//   FALL: 'fall',
+//   WINTER: 'winter',
+// };
+
+//We can assign number or string to enum.
+//If we assign number, the first value will be 0, and the next one will be 1, and so on.
+// It can either be assigned to a number or a string but not both.
+enum Seasons {
+  winter,
+  spring,
+  summer,
+  fall,
+}
+
+function seasonsGreetings(season: Seasons) {
+  switch (season) {
+    case Seasons.spring:
+      return 'Hello spring!';
+    case Seasons.summer:
+      return 'Hello summer!';
+    case Seasons.fall:
+      return 'Hello fall!';
+    case Seasons.winter:
+      return 'Hello winter!';
+    default:
+      return 'Hello!';
+  }
+}
+
+//Doesn't give an error, but it should
+//While it can still accept SEASONS.<TYPE> it also accepts any string
+// seasonsGreetings('bruh');
+
+seasonsGreetings(Seasons.spring);
+
+// ------------------  ------------------
+
+enum PromiseStates {
+  pending,
+  fulfilled,
+  rejected,
+}
+
+const FakePromise = {
+  state: PromiseStates.pending,
+  resolve: function () {
+    this.state = PromiseStates.fulfilled;
+  },
+  reject: function () {
+    this.state = PromiseStates.rejected;
+  },
+};
+
+// --------------------------------------------
+
+//Tuples - fixed length array with fixed type of elements
+
+//This is an array
+const seasosn: string[] = ['spring', 'summer', 'fall', 'winter'];
+
+let simpleState: string;
+function simpleUseState(
+  initialState: string
+): [string, (newString: string) => void] {
+  if (!simpleState) {
+    simpleState = initialState;
+  }
+
+  function updateState(newState: string) {
+    simpleState = initialState;
+  }
+
+  //we assign, the first element to be string, and the second element to be a function
+  //usign tuples.
+  return [simpleState, updateState];
+}
+
+const [username, setUsername] = simpleUseState('John');
+
+// Use Enums if you have a fixed set of values that you want to use.
+// Use Tuples if you want to have a fixed length array with fixed type of elements.

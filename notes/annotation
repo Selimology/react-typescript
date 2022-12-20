@@ -1,0 +1,44 @@
+function getFruitBasketVerbalCount(fruitList) {
+  let verbalFruitCount: string;
+
+  if (fruitList.length > 5) {
+    verbalFruitCount = 'A lot of fruits';
+  } else {
+    verbalFruitCount = 'A few fruits';
+  }
+
+  return verbalFruitCount;
+}
+
+//if undefined is passed in, it will throw an error, so we add ! to tell typescript that we know it will not be undefined
+let favoriteDessert!: string;
+
+console.log(favoriteDessert);
+
+//Arrays
+
+let ingredients: string[];
+
+//Object
+let menu: {
+  courses: number;
+  veganOption: boolean;
+  drinkChoices: string[];
+} = {
+  courses: 3,
+  veganOption: true,
+  drinkChoices: ['water', 'soda', 'juice'],
+};
+
+//In this case, the courses property will be renamed to string and the type will be number
+const { courses: string } = menu;
+
+//Null
+const nullValue: null = null;
+
+async function getFruitList() {
+  const response = await fetch('https://myapi.com/fruit');
+  const fruitLists = await response.json();
+  const typeFruitList: string[] = fruitLists;
+  return typeFruitList;
+}

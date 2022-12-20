@@ -1,0 +1,51 @@
+//Literal type is a type that is a literal value. It is a type that is a string, number, boolean, or symbol.
+
+//in this case, it will only accept the string 'Apple' as a value.
+let fruitName: 'Apple' = 'Apple';
+
+//If you use const keyword, it will be a literal type.
+const fruitName2 = 'Banana';
+
+//Previously
+// const SEASONS = {
+//   SPRING: 'spring',
+//   SUMMER: 'summer',
+//   FALL: 'fall',
+//   WINTER: 'winter',
+// };
+
+//Now, using literal types
+type Seasons = 'spring' | 'summer' | 'fall' | 'winter';
+
+function seasonsGreetings(season: Seasons) {
+  switch (season) {
+    case 'spring':
+      console.log('Hello Spring');
+      break;
+    case 'summer':
+      console.log('Hello Summer');
+      break;
+    case 'fall':
+      console.log('Hello Fall');
+      break;
+    case 'winter':
+      console.log('Hello Winter');
+      break;
+  }
+}
+
+seasonsGreetings('automn');
+seasonsGreetings('spring');
+
+//literal type with numbers
+type Days = 1 | 2 | 3 | 4 | 5 | 6 | 7;
+
+//literal types with boolean
+type IsOpen = true;
+
+//literal types in a interface
+interface Fruit {
+  name: 'Apple' | 'Banana' | 'Orange';
+  color: 'Red' | 'Yellow' | 'Orange';
+  sweetness: number;
+}

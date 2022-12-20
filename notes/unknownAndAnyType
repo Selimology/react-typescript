@@ -1,0 +1,20 @@
+//If it is a must to use any, use unknown
+
+async function getFruitList() {
+  const response = await fetch('https://example.com/api/fruit');
+  const fruitList: string[] = await response.json();
+}
+
+//Type Narrowing - to prove if the type is a specific type or not.
+
+//If you do not know the type you'll be getting from the user or API
+//response, you'll have to use unknown
+const unknownString: string = 'What am I?';
+if (typeof unknownString === 'string') {
+  console.log(unknownString.toUpperCase());
+  let stringValue: string = unknownString;
+}
+
+//If you have to use Any
+// Use unknown instead of any
+// Use type narrowing to prove the type

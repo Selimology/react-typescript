@@ -1,0 +1,33 @@
+let position: Coordinates3D = [26, 123, 2];
+
+//Type Alias - Prevent repeating the same type over and over again.
+type Coordinates3D = [number, number, number];
+
+function calculateDistance3D(
+  point1: Coordinates3D,
+  point2: Coordinates3D
+): number {
+  // ...
+}
+
+type FruitList = string[];
+interface IndexedFruitList {
+  [index: number]: string;
+}
+
+const fruit: FruitList = ['apple', 'banana', 'orange'];
+
+const otherFruitList: string[] = fruit;
+const indexedFruitList: IndexedFruitList = fruit;
+
+interface Fruit {
+  name: string;
+  color: string;
+  sweetness: number;
+}
+//Making a type alias using the interface.
+type FruitType = Fruit;
+//Making another type alias using the same interface.
+type EatFruit = (fruit: Fruit) => void;
+
+//If you want to use the same interface for multiple types, use the type keyword.

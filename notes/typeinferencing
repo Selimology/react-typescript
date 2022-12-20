@@ -1,0 +1,36 @@
+let fruitName = 'Banana';
+
+fruitName = 25;
+
+let numberOfFruits = 25;
+let isAppleSeason = true;
+
+let fruit = {
+  name: 'Banana',
+  color: 'Yellow',
+  sweetness: 90,
+  isRipe: true,
+};
+
+let bananaName = fruit.name;
+
+let { sweetness } = fruit;
+
+let fruits = ['Apple', 'Banana']; // string[]
+
+// const alternatedFruitNames = fruits.map((name, index) => {
+//   return index % 2 === 0 ? name.toUpperCase() : name.toLowerCase();
+// });
+
+const nameLength = fruits.map((name) => {
+  return name.length;
+});
+
+function alternateUppercase(name, index) {
+  if (index % 2 === 0) {
+    return name.toUpperCase();
+  }
+  return name;
+}
+
+const alternatedFruitNames = fruits.map(alternateUppercase);

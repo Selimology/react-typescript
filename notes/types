@@ -1,0 +1,99 @@
+typeof true; // "boolean"
+
+let fruitName = 'apple';
+typeof fruitName; // "string"
+
+//Boolean
+
+const isTrue = true;
+const isFalse = false;
+
+const oppositeOfTrue = !true;
+
+!!0 === false; //true;
+
+//Number
+const theAnswer = 42;
+const pi = 3.14;
+
+const highestValue = Infinity;
+
+//NaN - not a Number
+
+const imaginaryNumber = Math.sqrt(-1); // NaN
+
+typeof imaginaryNumber; // "number"
+imaginaryNumber === NaN; // false
+
+Number.isNaN(imaginaryNumber); // true
+
+// BigInt - add n to the end of the number
+typeof 1337n; // "bigint"
+1337n === 1337; // false
+
+//String
+
+const fruit = 'Apple';
+const vegetableName = 'Squash';
+const rockn = `Quarts`;
+
+//Symbol
+
+let symbol1 = Symbol('Apple');
+let symbol2 = Symbol('Apple');
+
+symbol1 === symbol2; // false
+
+typeof symbol1; // symbol
+
+//Undefined
+
+let undefinedValue;
+typeof undefinedValue; // undefined
+
+//Null - absence of value
+
+let nullish = null;
+typeof nullish; // object
+nullish === null; //true
+
+//Object
+
+let car = {
+  wheels: 4,
+  color: 'red',
+};
+
+let car2 = {
+  wheels: 4,
+  color: 'red',
+};
+
+car === car2; // false
+
+let carClone = car;
+carClone === car; // true
+
+typeof car; //object
+
+//Array
+
+let myArray = [1, 2, 3];
+typeof myArray; // object
+Array.isArray(myArray); // true
+
+//Function
+
+typeof function () {}; // function
+typeof (() => {}); // function
+
+//Classes
+
+class Car {
+  constructor(wheels, color) {
+    this.wheels = wheels;
+    this.color = color;
+  }
+}
+
+typeof Car; // function

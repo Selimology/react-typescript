@@ -1,0 +1,26 @@
+function sendRequestAndForget(): void {
+  return fetch('https://example.com/addUser', { method: 'POST' });
+}
+
+const output = sendRequestAndForget();
+
+function performRequest(requestCallback: () => void) {
+  //
+}
+
+// Never ever going to return anything
+function exceptionMain(): never {
+  throw new Error('Error!');
+}
+
+const outputMain = exceptionMain();
+
+function loopForever(): never {
+  while (true) {}
+}
+
+function implictNever() {
+  return loopForever();
+}
+
+const output2 = implictNever();

@@ -1,0 +1,132 @@
+//Interface are reusable and can be used to describe the structure of an object
+
+interface Vehicle {
+  wheels: number;
+  color: string;
+}
+
+const car: Vehicle = { wheels: 4, color: 'white' };
+const motorcyle: Vehicle = {
+  wheels: 2,
+  color: 'white',
+};
+
+//--------------------------------------------------------------
+
+interface Nutrient {
+  name: string;
+  value: number;
+}
+
+interface EdibleThing {
+  name: string;
+  color: string;
+  nutrients: Nutrient[];
+}
+
+//Incase we'll like to add more properties to the interface, we can use the extends keyword to extend the interface
+interface Fruit extends EdibleThing {
+  sweetness: number;
+}
+
+let apple: Fruit;
+
+let fruitBasket: Fruit[] = [];
+
+// You can push it to the array because it has the same structure as the other elements in the array
+const tomato = {
+  name: 'tomato',
+  color: 'red',
+  calories: 10,
+  nutrients: [{ name: 'vitamin A', value: 10 }],
+  sweetness: 10,
+};
+
+fruitBasket.push(tomato);
+
+//--------------------------------------------------------------
+
+//Declaration Merging
+//We can merge interfaces with the same name
+
+interface Person {
+  name: string;
+  age: number;
+  heigth: number;
+}
+
+interface Person {
+  weight: number;
+}
+
+const Selim: Person = {
+  name: 'Selim',
+  age: 20,
+  heigth: 1.8,
+  weight: 200,
+};
+
+//--------------------------------------------------------------
+
+//If the variable has extra properties, when push to the array, it won't show error
+//However if you directly push the object to the array, it will show error
+
+let carrot = {
+  name: 'tomato',
+  color: 'red',
+  calories: 10,
+  nutrients: [{ name: 'vitamin A', value: 10 }],
+  sweetness: 10,
+};
+
+fruitBasket.push(carrot);
+
+fruitBasket.push({
+  name: 'tomato',
+  color: 'red',
+  calories: 10,
+  nutrients: [{ name: 'vitamin A', value: 10 }],
+  sweetness: 10,
+});
+
+// --------------------------------------------------------------
+//We can use the optional property to make the property optional
+// To make it optional, we can add a question mark after the property name
+
+interface Vegetable {
+  name: string;
+  color: string;
+  sweetness?: number; // optional property can either be number or undefined
+}
+
+const vegetableBasket: Vegetable[] = [];
+
+vegetableBasket.push({ name: 'carrot', color: 'orange' });
+
+const sumSweetness = vegetableBasket.reduce(
+  (accumulator, vegetable: Vegetable) => {
+    // Make a type narrowing check to see if it is a number (or exists)
+    if (typeof vegetable.sweetness === 'number') {
+      return accumulator + vegetable.sweetness;
+    }
+
+    return accumulator;
+  }
+);
+
+//--------------------------------------------------------------
+
+//Index Properties
+//We can use index properties to make the interface more flexible
+//however we can only use string or number as index properties
+
+interface Football {
+  name: string;
+  color: string;
+  [playerNumber: number]: string;
+  //It can be either a string or a number
+}
+
+const football: Football = { name: 'football', color: 'white' };
+football[1] = 'beo';
+football[2] = 'beo';

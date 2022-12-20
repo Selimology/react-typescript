@@ -1,0 +1,82 @@
+//This applies only in typescript context, so
+//it will still work in javascript.
+
+class EdibleThing {
+  //protected means that the property is only accessible within the class and its subclasses
+  protected name: string;
+  //private means that the property is only accessible within the class
+  //won't work even if we extend the class
+  private surname: string;
+  readonly lastname: string;
+  constructor(name: string, surname: string, lastname: string) {
+    this.name = name;
+  }
+}
+class Fruit extends EdibleThing {
+  //public means that the property is accessible anywhere
+  public sweetness: number;
+  constructor(
+    name: string,
+    surname: string,
+    lastname: string,
+    sweetness: number
+  ) {
+    super(name, surname, lastname);
+    this.sweetness = sweetness;
+  }
+  public sayName() {
+    console.log(`My name is ${this.name} ${this.surname} ${this.lastname}`);
+  }
+}
+
+const apple = new Fruit('Apple', 60);
+
+apple.name = 'Banana';
+apple.lastname = 'bruh';
+apple.sayName();
+
+//To write shorter class
+class NotEdibleThing {
+  //we are assigning the modifiers to the constructor parameters
+  constructor(public storedName: string, private storedSweetness: number) {}
+
+  //accessor -get and set
+  //Any class that has only get or only set is considered readonly
+  // set name(nameInput: string) {
+  //   this.storedName = nameInput;
+  // }
+  get name() {
+    return this.storedName[0].toUpperCase() + this.storedName.slice(1);
+  }
+  set sweetness(sweetnessInput: number) {
+    if (sweetnessInput < 0) {
+      throw new Error('Sweetness must be greater than 0');
+    }
+    if (sweetnessInput > 100) {
+      throw new Error('Sweetness must be less than 100');
+    }
+    this.storedSweetness = sweetnessInput;
+  }
+  get sweetness() {
+    return this.storedSweetness;
+  }
+}
+const banana = new NotEdibleThing('Apple', 60);
+banana.sweetness = -110; //This will throw an error
+console.log(banana.sweetness);
+
+//To make sure it is private not only in Typescript but also in Javascript
+//we can use the # modifier
+class notHuman {
+  #name: string;
+  constructor(name: string) {
+    this.#name = name;
+  }
+
+  get name() {
+    return this.#name;
+  }
+}
+
+const notHuman1 = new notHuman('notHuman1');
+notHuman1.#name = 'Broh';
