@@ -1,0 +1,41 @@
+// function stringOrArrayLength(input: string | unknown[]) {
+//   return input.length;
+// }
+
+//Function Overload - we can define multiple function signatures for the same function name.
+function stringOrArrayLength(input: string): number;
+function stringOrArrayLength(input: unknown[]): number;
+function stringOrArrayLength(input: any) {
+  return input.length;
+}
+
+console.log(stringOrArrayLength('hello')); // 5
+console.log(stringOrArrayLength([1, 2, 3])); // 3
+
+//In this case, we'll like to prevent input of an object.
+console.log(stringOrArrayLength({ length: 10 })); // 10
+
+//--------------------------------------------------------------
+//Special paramter - this
+
+interface IceCreamSundae {
+  baseIceCream: string;
+  cholocateSauce: number;
+  cherry: boolean;
+}
+
+const hotFudgeSundae = {
+  baseIceCream: 'vanilla',
+  cholocateSauce: 10,
+  cherry: true,
+  //In this case, the cherry isn't specified on which interface to use
+  eat(this: IceCreamSundae) {
+    if (this.cherry) {
+      console.log('Yum cherry');
+    } else {
+      console.log('Yum');
+    }
+  },
+};
+
+hotFudgeSundae.eat();
