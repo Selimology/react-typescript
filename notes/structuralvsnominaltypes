@@ -1,0 +1,39 @@
+class Fruit {
+  isFruit: true = true;
+  constructor(public name: string) {}
+}
+class Apple extends Fruit {
+  type: 'Apple' = 'Apple';
+  constructor() {
+    super('Apple');
+  }
+}
+class Banana extends Fruit {
+  type: 'Banana' = 'Banana';
+  constructor() {
+    super('Banana');
+  }
+}
+
+let banana: Banana = new Apple();
+
+// Branded Primitatives
+// https://www.typescriptlang.org/docs/handbook/advanced-types.html#branded-primitives
+
+type USD = number & { _brand: 'USD' };
+type EUR = number & { _brand: 'EUR' };
+
+let income: USD = 1000;
+
+//We have to use an assertion signature
+
+let income2: USD = 1200 as USD;
+
+function convertToUSD(input: EUR): USD {
+  //We are using assertion signature to convert EUR to USD and make sure that the output is USD
+  return (input * 1.18) as USD;
+}
+
+//This way not only the objects are typesafe but also the primitive types are safe.
+let VAT = 15 as EUR;
+let VATinUSD = convertToUSD(VAT);
