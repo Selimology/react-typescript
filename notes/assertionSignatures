@@ -1,0 +1,33 @@
+//Canvas is HTML element | null
+// but to assert it to more specific type we use as HTMLCanvasElement
+
+const canvas: HTMLCanvasElement = document.getElementById(
+  'canvas'
+) as HTMLCanvasElement;
+
+const context = canvas.getContext('2d');
+
+//Assertion Signatures
+
+//Assertion Signatures are used to assert the type of a variable to a more specific type
+// ! Not recommended to be honest
+
+//Using this, we can assert the type of a string to a number
+//First assign it to unknown type and then to number type
+const ageInYears = 'too old to count' as unknown as number;
+
+function buttonEventListener(
+  event: string,
+  listener: any,
+  element: HTMLButtonElement
+) {
+  element.addEventListener(event, listener);
+}
+
+const anchor = document.createElement('a');
+//in this case, we'll like to convert the anchor to button element
+buttonEventListener(
+  'click',
+  () => console.log('mouse clicked'),
+  anchor as HTMLElement as HTMLButtonElement
+);
