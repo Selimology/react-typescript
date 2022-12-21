@@ -1,0 +1,45 @@
+//Discriminating Unions
+
+//We add a literal type property to the union type to help us determine which type it is
+
+interface Fruit {
+  type: 'fruit';
+  name: string;
+  color: string;
+  juice: () => void;
+}
+
+interface Vegetable {
+  type: 'vegetable';
+  name: string;
+  color: string;
+  steam: () => void;
+}
+
+type Food = Fruit | Vegetable;
+
+function prepareFood(food: Food) {
+  //While it possible to use the in property, if we need to check for multiple. It won't work
+  // if ('juice' in food) {
+
+  if (food.type === 'fruit') {
+    food.juice();
+  }
+}
+
+//------------------------------------
+
+//In this case , since we are throwing error typescript knows it is Error type. Data is null
+//So the returned result.data is string
+
+type StringResult =
+  | { error: Error; data: null }
+  | { error: null; data: string };
+
+function handleResult(result: StringResult) {
+  if (result.error) {
+    throw result.error;
+  }
+
+  return result.data;
+}
