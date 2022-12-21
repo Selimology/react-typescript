@@ -1,0 +1,61 @@
+// User Defined Type Guards.
+
+//Lets say we are working with an API, so we can't use discriminating union to add property to the interface
+interface Fruit {
+  name: string;
+  color: string;
+  sweetness: number;
+}
+interface Vegetable {
+  name: string;
+  color: string;
+  tenderness: number;
+}
+
+const tomato = { name: 'Tomato', color: 'red', tenderness: 5 };
+
+//We add type signature, type predicate
+//Type predicate is a function that returns a boolean value,
+// in this case we are checking if the food is a fruit
+// food is Fruit is the type predicate
+
+function isFruit(food: Fruit | Vegetable): food is Fruit {
+  if ('sweetness' in food) return true;
+  return false;
+}
+
+//Alternativaly we can also assert
+//In this case assertion signature is used, it means if no error is thrown, then the food is a fruit
+function assertIsFruit(food: any): asserts food is Fruit {
+  if (!('sweetness' in food)) throw new Error('Not a fruit');
+}
+
+//Second alternative assertion signature we can use
+function assertTrue(condition: boolean): asserts condition {
+  if (!condition) throw new Error();
+}
+
+function printFood(food: Fruit | Vegetable) {
+  // if (isFruit(food)) {
+  // assertIsFruit(food);
+  assertTrue('sweetness' in food);
+  console.log(`${food.name} is ${food.sweetness} % sweet.`);
+  // } else {
+  //   console.log(`${food.name} is ${food.tenderness} % tender.`);
+  // }
+}
+
+//----------------------//
+/* To summarize
+
+We can use typeguards made by user
+1. Type predicate function:
+If the function returns a boolean value, then it is a type predicate function (true or false)
+
+2. Assertion signature:
+If no error is thrown, then the food is a fruit
+
+3. Assertion signature with condition:
+If the condition is true, then the food is a fruit
+
+*/
